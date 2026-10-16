@@ -10,9 +10,9 @@ This is the "Full Tile" page for the Supplementary Certs tile in the
 
 ## What's here
 
-| Resource | Link |
-| --- | --- |
-| Physical Security & Resiliency | https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-/ |
+| Resource | What it is | Link |
+| --- | --- | --- |
+| Physical Security & Resiliency | The PSRDM Study Hub: a study guide and interactive test bank for the VA Physical Security and Resiliency Design Manual | https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-Design-/ |
 
 Physical Security & Resiliency is the first, at the owner's word (16 October
 2026). More are to come: a link added here goes on the Command Center's tile
@@ -41,7 +41,7 @@ scrolls sideways on a phone.
 `node verify/page.mjs` drives the page in Chromium: the links, in order, to the
 right sites, each in a new tab; the indigo tile with light lettering; the full
 footer; AAA on painted pixels on a desk and a phone, at rest and with a link
-hovered; no sideways scroll. `node verify/page.mjs --plant` plants ten mistakes
+hovered; no sideways scroll. `node verify/page.mjs --plant` plants eleven mistakes
 and confirms every one is caught. Not needed to run the site.
 
 ## Hosting

@@ -17,10 +17,15 @@ links, the full footer.
   `#4b0082`, deep `#3730a3`, bright `#4338ca`). Light lettering (12.1:1).
 - The hub tile sits last, after Face Off Games.
 - The first link reads "Physical Security & Resiliency" (the owner's choice
-  of the ampersand). The URL's trailing dash is the repo's own name.
-- No one-line description under the link yet: the Physical Security site and
-  its repo weren't reachable from the session that built this, so nothing was
-  written about it that couldn't be checked. Add one once it can be read.
+  of the ampersand) and goes to
+  https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-Design-/
+  (repo `Physical-Security-and-Resiliency-Design-`, the PSRDM Study Hub). It
+  first went up as `.../Physical-Security-and-Resiliency-/`, the address as
+  given, which has no site behind it; the owner found it dead and it was
+  corrected the same day, once GitHub's Pages deployment for the real repo
+  confirmed the address. The check's `wrongurl` plant is that old address.
+- Its description is in the site's own words (its README and page meta):
+  study guide and test bank for the VA PSRDM, ten chapters, 160 questions.
 
 **Keep in step:** a link added here is added to the hub's tile in the same
 sitting (and its `verify/page.mjs` lists), or the Full Tile button sends
@@ -28,5 +33,5 @@ students to a different list from the one they came from.
 
 **Checks:** `node verify/page.mjs` (links, indigo tile with light lettering,
 footer, AAA on painted pixels desk and phone at rest and hovered, no sideways
-scroll); `--plant` runs ten planted mistakes, all caught. When a link is
+scroll); `--plant` runs eleven planted mistakes, all caught. When a link is
 added, add it to `EXPECT`.

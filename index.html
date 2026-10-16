@@ -117,6 +117,15 @@
     .links a:hover, .links a:focus-visible { transform: none; }
   }
 
+  /* The name alone doesn't say what is behind it, so each link says it in
+     the site's own words rather than making a student click to find out. */
+  .what {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
   footer {
     text-align: center;
     padding: 0 1rem 2.5rem;
@@ -150,7 +159,10 @@
     <div class="tile-body">
       <ul class="links" aria-label="Supplementary certification resources">
         <li>
-          <a href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-/" target="_blank" rel="noopener">Physical Security &amp; Resiliency</a>
+          <a href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-Design-/" target="_blank" rel="noopener">
+            Physical Security &amp; Resiliency
+            <span class="what">Study guide and interactive test bank for the VA Physical Security and Resiliency Design Manual (PSRDM): all ten chapters summarized, and 160 multiple-choice questions with an explanation for every wrong answer.</span>
+          </a>
         </li>
       </ul>
     </div>

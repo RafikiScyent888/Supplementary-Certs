@@ -25,7 +25,7 @@ const PW = process.env.PW || "/opt/node22/lib/node_modules/playwright/index.mjs"
 const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
 
 const EXPECT = [
-  ["Physical Security & Resiliency", "https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-/"],   /* the first one, at the owner's word (16 October 2026) */
+  ["Physical Security & Resiliency", "https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-Design-/"],   /* the first one, at the owner's word (16 October 2026). The repo is Physical-Security-and-Resiliency-Design-: the address first given left out "Design" and went nowhere */
 ];
 const FOOTER = "Cyber Warrior Program — built by an instructor, for students, to make certification study more interactive. For educational purposes only. Not affiliated with, endorsed by, or sponsored by CompTIA®. All trademarks belong to their respective owners.";
 
@@ -93,7 +93,7 @@ async function run(dir, port) {
 
       if (vp.name === "desk") {
         /* 1. links */
-        const links = await page.$$eval(".links a", as => as.map(a => ({ text: a.textContent.replace(/\s+/g, " ").trim(), href: a.href, target: a.target })));
+        const links = await page.$$eval(".links a", as => as.map(a => ({ text: a.textContent.replace(/\s+/g, " ").trim(), href: a.href, target: a.target, what: !!a.querySelector(".what") })));
         if (links.length !== EXPECT.length) fail("links", `found ${links.length} links, expected ${EXPECT.length}`);
         EXPECT.forEach(([name, href], i) => {
           const l = links[i];
@@ -101,6 +101,7 @@ async function run(dir, port) {
           if (!l.text.includes(name)) fail("links", `link ${i + 1} should be "${name}", reads "${l.text.slice(0, 50)}"`);
           if (l.href !== href) fail("links", `link ${i + 1} goes to ${l.href}, expected ${href}`);
           if (l.target !== "_blank") fail("links", `link ${i + 1} doesn't open in a new tab`);
+          if (!l.what) fail("links", `link ${i + 1} has no description`);
         });
         /* 2. tile */
         const tile = await page.$eval(".tile-header", el => { const cs = getComputedStyle(el); return { bg: cs.backgroundColor, fg: cs.color }; });
@@ -131,10 +132,11 @@ async function run(dir, port) {
 }
 
 const PLANTS = {
-  wrongurl: { catches: "links", fn: s => s.replace('href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-/"', 'href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency/"') },
-  nolink: { catches: "links", fn: s => s.replace(/        <li>\s*<a href="https:\/\/rafikiscyent888\.github\.io\/Physical-Security-and-Resiliency-\/"[\s\S]*?<\/li>\n/, "") },
-  renamed: { catches: "links", fn: s => s.replace(">Physical Security &amp; Resiliency</a>", ">Physical Security</a>") },
-  sametab: { catches: "links", fn: s => s.replace('Physical-Security-and-Resiliency-/" target="_blank"', 'Physical-Security-and-Resiliency-/"') },
+  wrongurl: { catches: "links", fn: s => s.replace('href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-Design-/"', 'href="https://rafikiscyent888.github.io/Physical-Security-and-Resiliency-/"') },   /* the address first given, which has no site behind it */
+  nolink: { catches: "links", fn: s => s.replace(/        <li>\s*<a href="https:\/\/rafikiscyent888\.github\.io\/Physical-Security-and-Resiliency-Design-\/"[\s\S]*?<\/li>\n/, "") },
+  renamed: { catches: "links", fn: s => s.replace("Physical Security &amp; Resiliency\n", "Physical Security\n") },
+  sametab: { catches: "links", fn: s => s.replace('Physical-Security-and-Resiliency-Design-/" target="_blank"', 'Physical-Security-and-Resiliency-Design-/"') },
+  nowhat: { catches: "links", fn: s => s.replace(/\s*<span class="what">[^<]*<\/span>/, "") },
   purple: { catches: "tile", fn: s => s.replace("--royal-indigo: #4b0082;", "--royal-indigo: #6d28d9;") },
   darktext: { catches: "tile", fn: s => s.replace("background: var(--royal-indigo);\n    color: var(--text-light);", "background: var(--royal-indigo);\n    color: #16192e;") },
   lowcontrast: { catches: "contrast", fn: s => s.replace("  header p.tagline {\n", "  header p.tagline {\n    color: #8a93b8;\n") },
